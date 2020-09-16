@@ -37,8 +37,8 @@
         [{/if}]
     [{/foreach}]
 [{/capture}]
-[{if $toUser}]
 
+[{if $toUser}]
     [{include file="email/html/header.tpl" title=""}]
     <div class="block" style="width:100%;display:inline-block;vertical-align:top;">
         <table width="100%">
@@ -55,6 +55,9 @@
                         <a href="[{$retoureportal}]">[{$retoureportal}]</a><br/> der Versand ist für Sie kostenlos.
                         </p>
                     [{/if}]
+                    <br>
+                    <br>
+                    <br>
                     <p>
                         [{oxcontent ident="withdrawalemailend"}]
                     </p>
@@ -63,10 +66,9 @@
         </table>
     </div>
     [{include file="email/html/footer.tpl"}]
-
 [{else}]
     <h3>Hallo, </h3>
     <p>soeben wurde im [{$shop->oxshops__oxname->value}] Shop folgender Antrag auf Widerruf gestellt:</p>
-    [{$smarty.capture.content}]
 
+    [{$smarty.capture.content}]
 [{/if}]

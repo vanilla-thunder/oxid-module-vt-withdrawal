@@ -1,0 +1,32 @@
+{
+  "name": "vanilla-thunder/oxid-module-withdrawal-form",
+  "version": "3.0",
+  "description": "TinyMCE 5 Integration for OXID eShop V6.2",
+  "type": "oxideshop-module",
+  "homepage": "https://github.com/vanilla-thunder/oxid-module-withdrawal-form",
+  "license": [
+    "GPL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Marat Bedoev",
+      "email": "hello@mb-dev.pro"
+    }
+  ],
+  "extra": {
+    "oxideshop": {
+      "target-directory": "vt/withdrawal-form"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "oxid-esales/oxideshop-ce": "^v6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "VanillaThunder\\WithdrawalForm\\": "../../../source/modules/vt/withdrawal-form"
+    }
+  }
+}
+
+
