@@ -4,7 +4,7 @@
   "type": "oxideshop-module",
   "homepage": "https://github.com/vanilla-thunder/oxid-module-withdrawal-form",
   "license": [
-    "GPL-3.0"
+    "GPL-3.0-only"
   ],
   "authors": [
     {
