@@ -1,6 +1,6 @@
 {
   "name": "vanilla-thunder/oxid-module-withdrawal-form",
-  "description": "TinyMCE 5 Integration for OXID eShop V6.2",
+  "description": "das etwas intelligentere Widerrufsformular für OXID eShop V6.2",
   "type": "oxideshop-module",
   "homepage": "https://github.com/vanilla-thunder/oxid-module-withdrawal-form",
   "license": [
