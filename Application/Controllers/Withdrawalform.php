@@ -134,6 +134,11 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
     {
         $wdf = Registry::getConfig()->getRequestParameter("wdf");
 
+        if($wdf["datenschutz"] !== "1") {
+            $this->addTplParam("submitError", "DATENSCHUTZ");
+            return false;
+        };
+
         if (!Registry::getConfig()->getUser() && !$this->_checkRecaptcha(Registry::getConfig()->getRequestParameter("g-recaptcha-response"))) {
             return;
         }
