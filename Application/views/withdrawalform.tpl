@@ -240,7 +240,7 @@
         {
             e.preventDefault();
             e.stopPropagation();
-            if (!$("#wdfname").value() || !$("#wdfstreet").value() || !$("#wdfzipcity").value() || !$("#wdfemail").value() || !$("#wdforder").value() ||)
+            if (!$("#wdfname").val() || !$("#wdfstreet").val() || !$("#wdfzipcity").val() || !$("#wdfemail").val() || !$("#wdforder").val() )
             {
                 $("submitError").html('<div class="col-12 col-md-10"><div class="alert alert-danger">Bitte füllen Sie alle Pflichtfelder aus.</div></div>');
                 return false;
