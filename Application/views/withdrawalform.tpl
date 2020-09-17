@@ -242,7 +242,7 @@
             e.stopPropagation();
             if (!$("#wdfname").val() || !$("#wdfstreet").val() || !$("#wdfzipcity").val() || !$("#wdfemail").val() || !$("#wdforder").val() )
             {
-                $("submitError").html('<div class="col-12 col-md-10"><div class="alert alert-danger">Bitte füllen Sie alle Pflichtfelder aus.</div></div>');
+                $("#submitError").html('<div class="col-12"><div class="alert alert-danger">Bitte füllen Sie alle Pflichtfelder aus.</div></div>');
                 return false;
             }
             $.ajax({
