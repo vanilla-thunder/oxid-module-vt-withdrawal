@@ -1,4 +1,7 @@
 [{capture append="oxidBlock_content"}]
+    [{assign var="oldBS" value=$oView->isLegacyBS()}]
+
+
     [{assign var="template_title" value=$oView->getTitle()}]
     <h1 class="page-header">[{$template_title}]</h1>
     <form class="form-horizontal" action="[{$oViewConf->getSslSelfLink()}]" method="post" role="form" id="wdf">
@@ -12,43 +15,43 @@
         <div class="row justify-content-md-center">
             [{* <div class="col-12 col-md-3 col-lg-2"></div> *}]
             [{if $submitSuccess}]
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-8 [{if $oldBS}]col-md-push-2[{/if}]">
                 <div class="alert alert-success">[{oxmultilang ident="WITHDRAWAL_SUCCESS"}]</div>
             </div>
             [{else}]
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-8 [{if $oldBS}]col-md-push-2[{/if}]">
                 <div class="alert alert-info">Bitte füllen Sie sorgfältig dieses Fomular aus. Im Anscfhluß erhalten Sie eine Email mit Ihren Angaben und Instruktionen für den Rückversand der Ware.
                 </div>
 
                 <div class="form-group">
-                    <label for="wdfname" class="col-form-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="FIRST_NAME"}], [{oxmultilang ident="LAST_NAME"}] <b>*</b></label>
+                    <label for="wdfname" class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="FIRST_NAME"}], [{oxmultilang ident="LAST_NAME"}] <b>*</b></label>
                     <div class="col-sm-7 col-md-8">
                         <input type="text" class="form-control" id="wdfname" name="wdf[name]" required autocomplete="shipping name"
                                value="[{if $smarty.post.wdf.name}][{$smarty.post.wdf.name}][{elseif $oxcmp_user}][{$oxcmp_user->oxuser__oxfname->value}] [{$oxcmp_user->oxuser__oxlname->value}][{/if}]">
                     </div>
                 </div> [{* NAME *}]
                 <div class="form-group">
-                    <label for="wdfemail" class="col-form-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="STREET_AND_STREETNO"}] <b>*</b></label>
+                    <label for="wdfemail" class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="STREET_AND_STREETNO"}] <b>*</b></label>
                     <div class="col-sm-7 col-md-8">
                         <input type="text" class="form-control" id="wdfstreet" name="wdf[street]" required autocomplete="shipping street-address"
                                value="[{if $smarty.post.wdf.street}][{$smarty.post.wdf.street}][{elseif $oxcmp_user}][{$oxcmp_user->oxuser__oxstreet->value}] [{$oxcmp_user->oxuser__oxstreetnr->value}][{/if}]">
                     </div>
                 </div> [{* STRASSE *}]
                 <div class="form-group">
-                    <label for="wdfemail" class="col-form-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="POSTAL_CODE_AND_CITY"}] <b>*</b></label>
+                    <label for="wdfemail" class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="POSTAL_CODE_AND_CITY"}] <b>*</b></label>
                     <div class="col-sm-7 col-md-8">
                         <input type="text" class="form-control" id="wdfzipcity" name="wdf[zipcity]" required autocomplete="shipping postal-code address-level2"
                                value="[{if $smarty.post.wdf.zipcity}][{$smarty.post.wdf.zipcity}][{elseif $oxcmp_user}][{$oxcmp_user->oxuser__oxzip->value}] [{$oxcmp_user->oxuser__oxcity->value}][{/if}]">
                     </div>
                 </div> [{* PLZ ORT *}]
                 <div class="form-group">
-                    <label class="col-form-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="COUNTRY"}] <b>*</b></label>
+                    <label class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="COUNTRY"}] <b>*</b></label>
                     <div class="col-sm-7 col-md-8">
                         [{if $oViewConf->getCountryList()|@count == 1}]
                             <input type="text" class="form-control" id="wdfcountry" name="wdf[country]" required value="[{$_country->oxcountry__oxtitle->value}]" readonly
                                    autocomplete="shipping country-name">
                         [{else}]
-                            <select name="wdf[country]" class="custom-select" required>
+                            <select name="wdf[country]" class="[{if $oldBS}]form-control[{else}]custom-select[{/if}]" required>
                                 <option>Wählen Sie Ihr Land</option>
                                 [{foreach from=$oViewConf->getCountryList() item="_country"}]
                                     <option id="wdfcountry_[{$_country->oxcountry__oxid->value}]" value="[{$_country->oxcountry__oxtitle->value}]"
@@ -61,14 +64,14 @@
                     </div>
                 </div> [{* Land *}]
                 <div class="form-group">
-                    <label for="wdfemail" class="col-form-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="EMAIL_ADDRESS"}] <b>*</b></label>
+                    <label for="wdfemail" class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="EMAIL_ADDRESS"}] <b>*</b></label>
                     <div class="col-sm-7 col-md-8">
                         <input type="email" class="form-control" id="wdfemail" name="wdf[email]" required autocomplete="email"
                                value="[{$smarty.post.wdf.email|default:$oxcmp_user->oxuser__oxusername->value}]">
                     </div>
                 </div> [{* Email *}]
                 <div class="form-group">
-                    <label for="wdforder" class="col-form-label col-sm-5 col-md-4 text-right">
+                    <label for="wdforder" class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">
                         [{oxmultilang ident="PAGE_TITLE_ORDER"}]
                         [{if !$oView->getUserOrders()}][{oxmultilang ident="NUMBER_2"}] & [{oxmultilang ident="DATE"}][{/if}] <b>*</b>
                     </label>
@@ -89,9 +92,8 @@
                 </div> [{* Bestellung *}]
 
             </div>
-            <div class="col-12 col-md-10 pt-4">
 
-
+            <div class="col-12 col-md-10 pt-4 [{if $oldBS}]col-md-push-1[{/if}]">
                 [{if $oxcmp_user && $oView->getUserOrders() && !$smarty.post.wdf.oxorderid }]
                     [{* angemeldeter benutzer + hat Bestellungen + noch keine Bestellung ausgewählt*}]
                     <div class="alert alert-info text-center" role="alert">Wählen Sie Ihre Bestellung aus der Liste</div>
@@ -185,7 +187,7 @@
                 <div class="row justify-content-md-center pt-5"
                 " id="submitError">
                 [{if $submitError}]
-                    <div class="col-12 col-md-10">
+                    <div class="col-12 col-md-10 [{if $oldBS}]col-md-push-1[{/if}]">
                         <div class="alert alert-danger">
                             [{oxmultilang ident="WITHDRAWAL_ERROR_"|cat:$submitError args=$errorArgs }]
                         </div>

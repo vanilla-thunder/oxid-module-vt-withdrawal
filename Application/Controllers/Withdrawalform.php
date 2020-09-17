@@ -39,6 +39,10 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
         return $aPaths;
     }
 
+    public function isLegacyBS() {
+        return (Registry::getConfig()->getConfigParam('vtWithdrawalBootstrapVersion') == "v3");
+    }
+
     public function getUserOrders()
     {
         if ($oUser = $this->getUser()) {
