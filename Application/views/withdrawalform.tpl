@@ -49,8 +49,9 @@
                         <label class="[{if $oldBS}]control[{else}]col-form[{/if}]-label col-sm-5 col-md-4 text-right">[{oxmultilang ident="COUNTRY"}] <b>*</b></label>
                         <div class="col-sm-7 col-md-8">
                             [{if $oViewConf->getCountryList()|@count == 1}]
-                                <input type="text" class="form-control" id="wdfcountry" name="wdf[country]" required value="[{$_country->oxcountry__oxtitle->value}]" readonly
-                                       autocomplete="shipping country-name">
+                                [{foreach from=$oViewConf->getCountryList() item="_country"}]
+                                <input type="text" class="form-control" id="wdfcountry" name="wdf[country]" required value="[{$_country->oxcountry__oxtitle->value}]" readonly autocomplete="shipping country-name">
+                                [{/foreach}]
                             [{else}]
                                 <select name="wdf[country]" class="[{if $oldBS}]form-control[{else}]custom-select[{/if}]" required>
                                     <option>Wählen Sie Ihr Land</option>

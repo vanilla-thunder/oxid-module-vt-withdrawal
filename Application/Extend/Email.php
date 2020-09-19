@@ -71,14 +71,25 @@ class Email extends Email_parent
         $this->setViewData("retoureportal", Registry::getConfig()->getConfigParam("vtWithdrawalRetoureportal"));
         $this->_processViewArray();
 
-        // new
-        //$renderer = $this->getRenderer(); // private...
-        $bridge = $this->getContainer()->get(TemplateRendererBridgeInterface::class);
-        $bridge->setEngine($this->_getSmarty());
-        $renderer = $bridge->getTemplateRenderer();
+        $sShopVersion = \OxidEsales\EshopCommunity\Core\ShopVersion::getVersion();
+        if( version_compare($sShopVersion,"6.2.0") < 0) { // old
+            $smarty = $this->_getSmarty();
 
-        $this->setBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplateHtml, $this->getViewData()));
-        $this->setAltBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplatePlain, $this->getViewData()));
+            $this->setBody($smarty->fetch($this->_sWithdrawalEmailTemplateHtml));
+            $this->setAltBody($smarty->fetch($this->_sWithdrawalEmailTemplatePlain));
+        }
+        else { // new
+            //$renderer = $this->getRenderer(); // private...
+            $bridge = $this->getContainer()->get(TemplateRendererBridgeInterface::class);
+            $bridge->setEngine($this->_getSmarty());
+            $renderer = $bridge->getTemplateRenderer();
+
+            $this->setBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplateHtml, $this->getViewData()));
+            $this->setAltBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplatePlain, $this->getViewData()));
+        };
+
+
+
 
         return $this->send();
     }
