@@ -1,3 +1,7 @@
+# Achtung!
+Dieses Modul wurde vor DSGVO entwickelt und es fehlt die obligatorische Datenschutz-Checkbox.
+Solltet ihr es dennoch irgendwo einsetzen wollen, müsst ihr die Änderungen aus der Version für OXID 6 manuell übernehmen.
+
 ## Widerrufsformular für OXID eShop
 getestet mit OXID 4.10, sollte aber auch unter 4.9 laufen
 
