@@ -1,4 +1,4 @@
-## das etwas intelligentere Widerrufsformular für OXID eShop v6.2+
+## das etwas intelligentere Widerrufsformular für OXID eShop v6.0+
 
 
 
