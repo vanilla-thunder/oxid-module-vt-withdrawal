@@ -19,7 +19,7 @@
   },
   "require": {
     "php": ">=7.0",
-    "oxid-esales/oxideshop-ce": "^v6.2"
+    "oxid-esales/oxideshop-ce": "^v6.0"
   },
   "autoload": {
     "psr-4": {
