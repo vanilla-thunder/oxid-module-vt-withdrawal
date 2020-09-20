@@ -26,7 +26,7 @@ $aModule = [
         'en' => 'slightly smarty withdrawal form'
     ],
     'thumbnail' => 'doc/thumbnail.jpg',
-    'version' => '0.0.3 (2020-09-18)',
+    'version' => '0.0.4 (2020-09-20)',
     'author' => 'Marat Bedoev',
     'email' => openssl_decrypt("Az6pE7kPbtnTzjHlPhPCa4ktJLphZ/w9gKgo5vA//p4=", str_rot13("nrf-128-pop"), str_rot13("gvalzpr")),
     'url' => 'https://github.com/vanilla-thunder/oxid-module-withdrawal-form',
