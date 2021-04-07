@@ -55,6 +55,7 @@ class Email extends Email_parent
                 }
             }
             $this->setFrom($wdf->email, $wdf->name);
+            $this->setReplyTo($wdf->email, $wdf->name);
         }
 
         $this->setViewData("wdf", $wdf);
@@ -86,10 +87,7 @@ class Email extends Email_parent
 
             $this->setBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplateHtml, $this->getViewData()));
             $this->setAltBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplatePlain, $this->getViewData()));
-        };
-
-
-
+        }
 
         return $this->send();
     }
