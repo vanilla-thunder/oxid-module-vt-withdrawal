@@ -16,7 +16,7 @@
 
 $sMetadataVersion = '2.0';
 $aModule = [
-    'id' => 'withdrawal-form',
+    'id' => 'vt-withdrawal-form',
     'title' => [
         'de' => '[vt] Widerrufsformular',
         'en' => '[vt] Withdrawal Form'
@@ -26,7 +26,7 @@ $aModule = [
         'en' => 'slightly smarty withdrawal form'
     ],
     'thumbnail' => 'doc/thumbnail.jpg',
-    'version' => '0.0.4 (2020-09-20)',
+    'version' => '0.1.0 (2021-04-08)',
     'author' => 'Marat Bedoev',
     'email' => openssl_decrypt("Az6pE7kPbtnTzjHlPhPCa4ktJLphZ/w9gKgo5vA//p4=", str_rot13("nrf-128-pop"), str_rot13("gvalzpr")),
     'url' => 'https://github.com/vanilla-thunder/oxid-module-withdrawal-form',
@@ -37,21 +37,21 @@ $aModule = [
         'withdrawalform' => VanillaThunder\WithdrawalForm\Application\Controllers\Withdrawalform::class
     ],
     'templates' => [
-        'withdrawalform.tpl' => 'vt/withdrawal-form/Application/views/withdrawalform.tpl',
-        'withdrawalEmailHtml.tpl' => 'vt/withdrawal-form/Application/views/withdrawalEmailHtml.tpl',
-        'withdrawalEmailPlain.tpl' => 'vt/withdrawal-form/Application/views/withdrawalEmailPlain.tpl'
+        'withdrawalform.tpl' => 'vt/WithdrawalForm/Application/views/withdrawalform.tpl',
+        'withdrawalEmailHtml.tpl' => 'vt/WithdrawalForm/Application/views/withdrawalEmailHtml.tpl',
+        'withdrawalEmailPlain.tpl' => 'vt/WithdrawalForm/Application/views/withdrawalEmailPlain.tpl'
     ],
     'settings' => [
         [
             'group' => 'vtWithdrawalMain',
-            'name' => 'vtWithdrawalSitekey',
+            'name' => 'vtWithdrawalCaptchaSitekey',
             'type' => 'str',
             'value' => '',
             'position' => 0
         ],
         [
             'group' => 'vtWithdrawalMain',
-            'name' => 'vtWithdrawalSecret',
+            'name' => 'vtWithdrawalCaptchaSecret',
             'type' => 'str',
             'value' => '',
             'position' => 1
@@ -63,7 +63,9 @@ $aModule = [
             'value' => [
                 'small' => 'zu klein',
                 'large' => 'zu groß',
-                'dislike' => 'nicht gefallen'
+                'dislike' => 'nicht gefallen',
+                'defect' => 'defekt',
+                'damaged' => 'beschädigt'
             ],
             'position' => 2
         ],

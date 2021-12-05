@@ -4,8 +4,8 @@ $style = '<style type="text/css">.groupExp a.rc b {font-size: medium; color: #ff
 $aLang = [
     'charset' => 'UTF-8',
     'SHOP_MODULE_GROUP_vtWithdrawalMain' => $style . 'Einstellungen',
-    'SHOP_MODULE_vtWithdrawalSitekey' => "reCaptcha v2 Site Key <a href='https://www.google.com/recaptcha/admin' target='_blank'>( ? )</a>",
-    'SHOP_MODULE_vtWithdrawalSecret' => "reCaptcha v2 Secret <a href='https://www.google.com/recaptcha/admin' target='_blank'>( ? )</a>",
+    'SHOP_MODULE_vtWithdrawalCaptchaSitekey' => "reCaptcha v2 Site Key <a href='https://www.google.com/recaptcha/admin' target='_blank'>( ? )</a>",
+    'SHOP_MODULE_vtWithdrawalCaptchaSecret' => "reCaptcha v2 Secret <a href='https://www.google.com/recaptcha/admin' target='_blank'>( ? )</a>",
     'SHOP_MODULE_vtWithdrawalReasons' => "eigene Gründe, Format:<br/>abkuerzung => ausgeschriebener Name",
     'SHOP_MODULE_vtWithdrawalEmail' => "abweichendes Empfänger (sonst Adresse für Bestellungen)",
     'SHOP_MODULE_vtWithdrawalCC' => "weitere CC Empfänger",

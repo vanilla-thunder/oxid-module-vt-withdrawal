@@ -4,7 +4,7 @@
 
 
 ## Funktionen:
-- Google ReCaptcha für Schutz vor Spam/Missbrauch
+- Google reCaptcha für Schutz vor Spam/Missbrauch
 - konfigurierbare Retoure-Gründe
 - Das Formular wird per E-mail an den Kunden und an den Shopbetreiber verschickt
 - Zusätzliche und abweichende Empfänger möglich
@@ -16,15 +16,27 @@
 ![](doc/screenshot-logged-in.png)
 
 ## Installation
+### regulär: Modul als composer dependency hinzufügen
 - `composer require -n  vanilla-thunder/oxid-module-withdrawal-form`
-- Datenschutzhinweise ergänzen
+### alternativ: ohne Modul als dependency zu hinterlegen
+in der composer.json des Shops folgen
+folgende Befehle im `source/modules/` Ordner ausführen:
+- `mkdir vt && cd vt`
+- `git clone https://github.com/vanilla-thunder/oxid-module-withdrawal-form.git WithdrawalForm`
+- `cd ../../../`
+- `composer dump-autoload -o`
+- `vendor/bin/oe-console oe:module:install-configuration source/modules/vt/WithdrawalForm/`
+  
+## Konfiguration
 - Modul aktivieren
 - Modul-Einstellungen vornehmen
+- Datenschutzhinweise ergänzen, falls reCaptcha verwendet werden soll.
 - bei Bedarf SEO URL für *``index.php?cl=withdrawalform``* erstellen
-- bei Bedarf eine CMS Seite mit dem Ident `withdrawalemailend` erstellen, diese wird im Email Footer eingefügt und soltle so ähnlich wie `oxemailfooter`  aufgebaut sein.
+- eine CMS Seite mit dem Ident `withdrawalemailend` erstellen, diese wird im Email Footer eingefügt und soltle so ähnlich wie `oxemailfooter`  aufgebaut sein.
 
 ## reCaptcha & DSGVO
-Der Knackpunkt ist: reCaptcha sammelt und analysiert Daten u.A. über das Gerät und das Verhalten im Browser, um normale Besucher von Bots zu unterscheiden.  
+Das Modul benötigt einen Key für Google reCaptcha, da das Formualr sonst für Spam Mails missbraucht werden könnte.
+reCaptcha sammelt und analysiert Daten u.A. über das Gerät und das Verhalten im Browser, um normale Besucher von Bots zu unterscheiden.  
 Somit muss reCaptcha in die Datenschutzbedingungen entsprechend erwähnt werden.
   
 Die Einbindung von reCaptcha ohne ausdrücklicher Einwilligung wird mit DSGVO Artikel 6 Abschnitt 1 Buchstabe f begründet: 

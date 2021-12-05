@@ -1,8 +1,7 @@
 [{capture append="oxidBlock_content"}]
     [{assign var="oldBS" value=$oView->isLegacyBS()}]
-
-
     [{assign var="template_title" value=$oView->getTitle()}]
+
     <h1 class="page-header">[{$template_title}]</h1>
     <form class="form-horizontal" action="[{$oViewConf->getSslSelfLink()}]" method="post" role="form" id="wdf">
         <div class="hidden">
@@ -261,10 +260,16 @@
     </script>
     [{oxscript add=$smarty.capture.wdfjs}]
 [{/capture}]
-[{if $smarty.post.ajax=="1"}]
+
+[{if !$oView->getRecaptchaSiteKey() }]
+    <br/><br/>
+    <div style="text-align: center"><h2>reCaptcha Site Key und Secret müssen in den Moduleinstellungen konfiguriert werden!</h2></div>
+[{elseif $smarty.post.ajax=="1"}]
     [{foreach from=$oxidBlock_content item="_block"}]
         [{$_block}]
     [{/foreach}]
 [{else}]
     [{include file="layout/page.tpl"}]
 [{/if}]
+
+

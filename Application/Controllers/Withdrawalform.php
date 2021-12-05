@@ -2,8 +2,8 @@
 
 /**
  * vanilla-thunder/oxid-module-withdrawal-form
- * Smart Withdrawal Form for OXID eShop v6.2+
- * Copyright (C) 2020 Marat Bedoev
+ * Smart Withdrawal Form for OXID eShop v6.0+
+ * Copyright (C) 2021 Marat Bedoev
  *
  * This program is free software;
  * you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation;
@@ -85,14 +85,16 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
 
     public function getRecaptchaSiteKey()
     {
-        return Registry::getConfig()->getConfigParam('vtWithdrawalSitekey');
+        return Registry::getConfig()->getConfigParam('vtWithdrawalCaptchaSitekey');
     }
+
     protected function _checkRecaptcha($token)
     {
         if (!$token) {
-            $this->addTplParam("submitError", "1");
+            $this->addTplParam("submitError", "ROBOT");
             return false;
         }
+
         $this->addTplParam("errorArgs", Registry::getConfig()->getActiveShop()->oxshops__oxorderemail->value);
 
         $client  = @$_SERVER['HTTP_CLIENT_IP'];
@@ -105,7 +107,7 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
         }
 
         $data = [
-            'secret' => Registry::getConfig()->getConfigParam("vtWithdrawalSecret"),
+            'secret' => Registry::getConfig()->getConfigParam("vtWithdrawalCaptchaSecret"),
             'response' => $token,
             'remoteip' => $ip
         ];
@@ -126,10 +128,10 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
         elseif ($response->success === true) {
             return true;
         } elseif ($response->success === false) {
-            $this->addTplParam("submitError", "2");
+            $this->addTplParam("submitError", "CAPTCHA");
         } // captcha nicht bestätigt
         else {
-            $this->addTplParam("submitError", "3");
+            $this->addTplParam("submitError", "EMAILNOTSENT");
         } // sollte eigentlich nicht passieren
         return false;
     }
@@ -141,28 +143,28 @@ class Withdrawalform extends \OxidEsales\Eshop\Application\Controller\FrontendCo
         if($wdf["datenschutz"] !== "1") {
             $this->addTplParam("submitError", "DATENSCHUTZ");
             return false;
-        };
+        }
 
         if (!Registry::getConfig()->getUser() && !$this->_checkRecaptcha(Registry::getConfig()->getRequestParameter("g-recaptcha-response"))) {
-            return;
+            return false;
         }
 
         try {
-            /** @var oxEmail $oEmail */
+            /** @var \VanillaThunder\WithdrawalForm\Application\Extend\Email $oEmail */
             $oEmail = oxNew("oxEmail");
             $x = $oEmail->sendWithdrawalRequestToOwner($wdf);
             $y = $oEmail->sendWithdrawalRequestToUser($wdf);
-        } catch (Exception $oException) {
-            $this->addTplParam("submitError", "3");
+        } catch (\Exception $oException) {
+            $this->addTplParam("submitError", "EMAILNOTSENT");
             $this->addTplParam("errorArgs", $oEmail->getShop()->oxshops__oxorderemail->value);
         }
 
         if ($x) {
             $this->addTplParam("submitSuccess", true);
         } else {
-            $this->addTplParam("submitError", "3");
+            $this->addTplParam("submitError", "EMAILNOTSENT");
             $this->addTplParam("errorArgs", $oEmail->getShop()->oxshops__oxorderemail->value);
         }
-        //if(!$r2) Registry::getUtils()->writeToLog("")
+        return true;
     }
 }
